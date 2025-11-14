@@ -1,0 +1,184 @@
+{
+    "version": "1.0",
+    "description": "Skill activation triggers for Dukkan project. Controls when skills automatically suggest or block actions.",
+    "skills": {
+        "skill-developer": {
+            "type": "domain",
+            "enforcement": "suggest",
+            "priority": "high",
+            "description": "Meta-skill for creating and managing Claude Code skills",
+            "promptTriggers": {
+                "keywords": [
+                    "skill system",
+                    "create skill",
+                    "add skill",
+                    "skill triggers",
+                    "skill rules",
+                    "hook system",
+                    "skill development",
+                    "skill-rules.json"
+                ],
+                "intentPatterns": [
+                    "(how do|how does|explain).*?skill",
+                    "(create|add|modify|build).*?skill",
+                    "skill.*?(work|trigger|activate|system)"
+                ]
+            }
+        },
+        "backend-dev-guidelines": {
+            "type": "domain",
+            "enforcement": "suggest",
+            "priority": "high",
+            "description": "Spring Boot microservices development patterns for Dukkan (Java 25, Spring Boot 3.5.7, PostgreSQL 17)",
+            "promptTriggers": {
+                "keywords": [
+                    "backend",
+                    "microservice",
+                    "controller",
+                    "service",
+                    "repository",
+                    "entity",
+                    "domain",
+                    "API",
+                    "endpoint",
+                    "REST",
+                    "Spring Boot",
+                    "Spring",
+                    "JPA",
+                    "Hibernate",
+                    "database",
+                    "Liquibase",
+                    "migration",
+                    "DTO",
+                    "mapper",
+                    "exception",
+                    "validation",
+                    "PostgreSQL",
+                    "SOLID",
+                    "DDD",
+                    "domain-driven"
+                ],
+                "intentPatterns": [
+                    "(create|add|implement|build).*?(endpoint|API|controller|service|repository|entity)",
+                    "(fix|handle|debug).*?(error|exception|backend|service)",
+                    "(add|implement|create).*?(validation|error.*?handling|exception)",
+                    "(organize|structure|refactor).*?(backend|service|API|microservice)",
+                    "(how to|best practice).*?(backend|Spring|controller|service|repository)",
+                    "(migration|database|schema).*?(change|update|create)",
+                    "(layered|architecture|DDD|SOLID)"
+                ]
+            },
+            "fileTriggers": {
+                "pathPatterns": [
+                    "backend/**/*.java",
+                    "backend/**/pom.xml",
+                    "backend/**/application.yml",
+                    "backend/**/application.yaml",
+                    "backend/**/db/changelog/**/*.xml"
+                ],
+                "pathExclusions": [
+                    "**/*Test.java",
+                    "**/test/**",
+                    "**/target/**"
+                ],
+                "contentPatterns": [
+                    "@RestController",
+                    "@Service",
+                    "@Repository",
+                    "@Entity",
+                    "@Controller",
+                    "@GetMapping",
+                    "@PostMapping",
+                    "@PutMapping",
+                    "@DeleteMapping",
+                    "JpaRepository",
+                    "@Transactional",
+                    "Liquibase",
+                    "@Valid"
+                ]
+            }
+        },
+        "frontend-dev-guidelines": {
+            "type": "domain",
+            "enforcement": "suggest",
+            "priority": "high",
+            "description": "React 19 + TypeScript + Mantine UI best practices for Dukkan frontend",
+            "promptTriggers": {
+                "keywords": [
+                    "component",
+                    "react component",
+                    "UI",
+                    "frontend",
+                    "page",
+                    "modal",
+                    "dialog",
+                    "form",
+                    "Mantine",
+                    "Mantine UI",
+                    "Grid",
+                    "Stack",
+                    "styling",
+                    "React",
+                    "TypeScript",
+                    "context",
+                    "state",
+                    "hook",
+                    "service",
+                    "API call",
+                    "axios",
+                    "notification",
+                    "cart",
+                    "admin"
+                ],
+                "intentPatterns": [
+                    "(create|add|make|build|update|modify|edit).*?(component|UI|page|modal|dialog|form)",
+                    "(how to|best practice).*?(component|react|Mantine|frontend)",
+                    "(style|design|layout).*?(component|UI|page)",
+                    "(state|context|hook).*?(manage|create|implement)",
+                    "(API|service|axios).*?(call|fetch|request)"
+                ]
+            },
+            "fileTriggers": {
+                "pathPatterns": [
+                    "frontend/src/**/*.tsx",
+                    "frontend/src/**/*.ts",
+                    "frontend/src/components/**/*",
+                    "frontend/src/pages/**/*",
+                    "frontend/src/services/**/*",
+                    "frontend/src/context/**/*",
+                    "frontend/src/types/**/*"
+                ],
+                "pathExclusions": [
+                    "**/*.test.tsx",
+                    "**/*.test.ts",
+                    "**/*.spec.tsx",
+                    "**/*.spec.ts",
+                    "**/vite.config.ts",
+                    "**/tsconfig.json",
+                    "**/node_modules/**"
+                ],
+                "contentPatterns": [
+                    "from '@mantine/",
+                    "import.*{.*}.*from '@mantine",
+                    "useForm",
+                    "useState",
+                    "useEffect",
+                    "useContext",
+                    "createContext",
+                    "FC<",
+                    "interface.*Props",
+                    "axios\\.",
+                    "notifications\\.show"
+                ]
+            },
+            "blockMessage": "⚠️ BEST PRACTICES REMINDER - Frontend Development\n\n📋 RECOMMENDED ACTIONS:\n1. Review 'frontend-dev-guidelines' skill\n2. Ensure TypeScript types are properly defined (no 'any')\n3. Use Mantine UI components (@mantine/core)\n4. Follow React 19 patterns (functional components, hooks)\n5. Handle loading and error states\n6. Use proper form validation with Mantine Form\n\nReason: Maintain consistency with Dukkan frontend architecture\nFile: {file_path}\n\n💡 TIP: Check existing patterns in components/ and pages/",
+            "skipConditions": {
+                "sessionSkillUsed": true,
+                "fileMarkers": [
+                    "@skip-validation"
+                ],
+                "envOverride": "SKIP_FRONTEND_GUIDELINES"
+            }
+        }
+    }
+}

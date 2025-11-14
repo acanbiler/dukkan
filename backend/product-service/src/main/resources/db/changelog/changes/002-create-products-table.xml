@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="002-create-products-table" author="dukkan">
+        <createTable tableName="products">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="text"/>
+            <column name="price" type="decimal(12,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stock_quantity" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sku" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="category_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                constraintName="uk_product_sku"
+                tableName="products"
+                columnNames="sku"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_product_category"
+                baseTableName="products"
+                baseColumnNames="category_id"
+                referencedTableName="categories"
+                referencedColumnNames="id"
+                onDelete="RESTRICT"/>
+
+        <createIndex indexName="idx_product_category" tableName="products">
+            <column name="category_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_product_is_active" tableName="products">
+            <column name="is_active"/>
+        </createIndex>
+
+        <createIndex indexName="idx_product_sku" tableName="products">
+            <column name="sku"/>
+        </createIndex>
+
+        <createIndex indexName="idx_product_name" tableName="products">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

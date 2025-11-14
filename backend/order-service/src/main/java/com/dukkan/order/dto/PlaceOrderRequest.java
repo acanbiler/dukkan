@@ -1,0 +1,19 @@
+package com.dukkan.order.dto;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
+
+import java.util.List;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class PlaceOrderRequest {
+
+    @NotEmpty(message = "Order must contain at least one item")
+    @Valid
+    private List<OrderItemRequest> items;
+}

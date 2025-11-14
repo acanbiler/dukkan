@@ -1,0 +1,171 @@
+{
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "create": "Oluştur",
+    "update": "Güncelle",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "sort": "Sırala",
+    "actions": "İşlemler",
+    "yes": "Evet",
+    "no": "Hayır",
+    "back": "Geri",
+    "next": "İleri",
+    "submit": "Gönder",
+    "close": "Kapat"
+  },
+  "nav": {
+    "home": "Ana Sayfa",
+    "products": "Ürünler",
+    "categories": "Kategoriler",
+    "cart": "Sepet",
+    "admin": "Yönetim Paneli",
+    "login": "Giriş Yap",
+    "register": "Kayıt Ol",
+    "logout": "Çıkış Yap",
+    "profile": "Profil"
+  },
+  "auth": {
+    "login": {
+      "title": "Tekrar hoş geldiniz!",
+      "subtitle": "Henüz bir hesabınız yok mu?",
+      "createAccount": "Hesap oluştur",
+      "email": "E-posta",
+      "emailPlaceholder": "eposta@ornek.com",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifreniz",
+      "signIn": "Giriş yap",
+      "invalidEmail": "Geçersiz e-posta",
+      "passwordMinLength": "Şifre en az 6 karakter olmalıdır",
+      "success": "Tekrar hoş geldiniz, {{name}}!",
+      "error": "Geçersiz e-posta veya şifre"
+    },
+    "register": {
+      "title": "Hesap oluştur",
+      "subtitle": "Zaten bir hesabınız var mı?",
+      "signIn": "Giriş yap",
+      "firstName": "Ad",
+      "firstNamePlaceholder": "Ahmet",
+      "lastName": "Soyad",
+      "lastNamePlaceholder": "Yılmaz",
+      "email": "E-posta",
+      "emailPlaceholder": "eposta@ornek.com",
+      "password": "Şifre",
+      "passwordPlaceholder": "Şifreniz",
+      "confirmPassword": "Şifre Onayı",
+      "confirmPasswordPlaceholder": "Şifrenizi onaylayın",
+      "createAccount": "Hesap oluştur",
+      "invalidEmail": "Geçersiz e-posta",
+      "passwordMinLength": "Şifre en az 6 karakter olmalıdır",
+      "passwordsDoNotMatch": "Şifreler eşleşmiyor",
+      "firstNameMinLength": "Ad en az 2 karakter olmalıdır",
+      "lastNameMinLength": "Soyad en az 2 karakter olmalıdır",
+      "success": "Kayıt başarılı!",
+      "error": "Kayıt başarısız"
+    },
+    "logout": {
+      "success": "Başarıyla çıkış yaptınız"
+    }
+  },
+  "products": {
+    "title": "Ürünler",
+    "noProducts": "Ürün bulunamadı",
+    "addToCart": "Sepete Ekle",
+    "outOfStock": "Stokta Yok",
+    "inStock": "Stokta Var",
+    "stock": "Stok",
+    "price": "Fiyat",
+    "category": "Kategori",
+    "sku": "Ürün Kodu",
+    "description": "Açıklama",
+    "search": "Ürün ara",
+    "filter": {
+      "all": "Tüm Ürünler",
+      "byCategory": "Kategoriye Göre",
+      "byPrice": "Fiyata Göre"
+    }
+  },
+  "cart": {
+    "title": "Alışveriş Sepeti",
+    "empty": "Sepetiniz boş",
+    "item": "Ürün",
+    "items": "Ürünler",
+    "quantity": "Adet",
+    "total": "Toplam",
+    "subtotal": "Ara Toplam",
+    "checkout": "Ödeme Yap",
+    "continueShopping": "Alışverişe Devam Et",
+    "remove": "Kaldır",
+    "clear": "Sepeti Temizle"
+  },
+  "admin": {
+    "title": "Yönetim Paneli",
+    "dashboard": "Kontrol Paneli",
+    "products": {
+      "title": "Ürünler",
+      "create": "Ürün Oluştur",
+      "edit": "Ürünü Düzenle",
+      "delete": "Ürünü Sil",
+      "list": "Ürün Listesi",
+      "form": {
+        "sku": "Ürün Kodu",
+        "name": "İsim",
+        "description": "Açıklama",
+        "price": "Fiyat",
+        "stock": "Stok Miktarı",
+        "category": "Kategori",
+        "active": "Aktif",
+        "images": "Görseller"
+      }
+    },
+    "categories": {
+      "title": "Kategoriler",
+      "create": "Kategori Oluştur",
+      "edit": "Kategoriyi Düzenle",
+      "delete": "Kategoriyi Sil",
+      "list": "Kategori Listesi",
+      "form": {
+        "name": "İsim",
+        "description": "Açıklama",
+        "parent": "Üst Kategori",
+        "active": "Aktif"
+      }
+    },
+    "users": {
+      "title": "Kullanıcılar",
+      "list": "Kullanıcı Listesi",
+      "role": "Rol",
+      "status": "Durum",
+      "actions": "İşlemler"
+    }
+  },
+  "categories": {
+    "title": "Kategoriler",
+    "all": "Tüm Kategoriler",
+    "noCategories": "Kategori bulunamadı"
+  },
+  "errors": {
+    "generic": "Bir şeyler ters gitti",
+    "network": "Ağ hatası. Lütfen bağlantınızı kontrol edin.",
+    "notFound": "Bulunamadı",
+    "unauthorized": "Yetkisiz. Lütfen giriş yapın.",
+    "forbidden": "Bu kaynağa erişim izniniz yok",
+    "serverError": "Sunucu hatası. Lütfen daha sonra tekrar deneyin."
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "minLength": "Minimum uzunluk {{min}} karakterdir",
+    "maxLength": "Maksimum uzunluk {{max}} karakterdir",
+    "email": "Geçersiz e-posta adresi",
+    "number": "Sayı olmalıdır",
+    "positive": "Pozitif bir sayı olmalıdır",
+    "min": "Minimum değer {{min}}",
+    "max": "Maksimum değer {{max}}"
+  }
+}

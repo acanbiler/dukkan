@@ -1,0 +1,171 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "update": "Update",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "categories": "Categories",
+    "cart": "Cart",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back!",
+      "subtitle": "Don't have an account yet?",
+      "createAccount": "Create account",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "signIn": "Sign in",
+      "invalidEmail": "Invalid email",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "success": "Welcome back, {{name}}!",
+      "error": "Invalid email or password"
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Already have an account?",
+      "signIn": "Sign in",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Doe",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Your password",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "createAccount": "Create account",
+      "invalidEmail": "Invalid email",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "firstNameMinLength": "First name must be at least 2 characters",
+      "lastNameMinLength": "Last name must be at least 2 characters",
+      "success": "Registration successful!",
+      "error": "Registration failed"
+    },
+    "logout": {
+      "success": "You have been logged out successfully"
+    }
+  },
+  "products": {
+    "title": "Products",
+    "noProducts": "No products found",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock",
+    "stock": "Stock",
+    "price": "Price",
+    "category": "Category",
+    "sku": "SKU",
+    "description": "Description",
+    "search": "Search products",
+    "filter": {
+      "all": "All Products",
+      "byCategory": "By Category",
+      "byPrice": "By Price"
+    }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "item": "Item",
+    "items": "Items",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping",
+    "remove": "Remove",
+    "clear": "Clear Cart"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "dashboard": "Dashboard",
+    "products": {
+      "title": "Products",
+      "create": "Create Product",
+      "edit": "Edit Product",
+      "delete": "Delete Product",
+      "list": "Product List",
+      "form": {
+        "sku": "SKU",
+        "name": "Name",
+        "description": "Description",
+        "price": "Price",
+        "stock": "Stock Quantity",
+        "category": "Category",
+        "active": "Active",
+        "images": "Images"
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "create": "Create Category",
+      "edit": "Edit Category",
+      "delete": "Delete Category",
+      "list": "Category List",
+      "form": {
+        "name": "Name",
+        "description": "Description",
+        "parent": "Parent Category",
+        "active": "Active"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "list": "User List",
+      "role": "Role",
+      "status": "Status",
+      "actions": "Actions"
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "all": "All Categories",
+    "noCategories": "No categories found"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Network error. Please check your connection.",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized. Please login.",
+    "forbidden": "You don't have permission to access this resource",
+    "serverError": "Server error. Please try again later."
+  },
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Minimum length is {{min}} characters",
+    "maxLength": "Maximum length is {{max}} characters",
+    "email": "Invalid email address",
+    "number": "Must be a number",
+    "positive": "Must be a positive number",
+    "min": "Minimum value is {{min}}",
+    "max": "Maximum value is {{max}}"
+  }
+}

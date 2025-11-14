@@ -1,0 +1,1 @@
+Create a new microservice in the backend. Ask for the service name, then create the standard Maven project structure under backend/{service-name}/ with src/main/java/com/dukkan/{service}/, src/main/resources/, and src/test/. Also create a corresponding Docker configuration in docker/{service-name}/.
