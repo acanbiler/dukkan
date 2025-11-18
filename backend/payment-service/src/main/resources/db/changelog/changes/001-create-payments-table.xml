@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="001-create-payments-table" author="dukkan">
+        <comment>Create payments table for storing payment transactions</comment>
+
+        <createTable tableName="payments">
+            <!-- Primary Key -->
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <!-- Payment Reference (Unique) -->
+            <column name="payment_reference" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+
+            <!-- Order and User References -->
+            <column name="order_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Payment Amount and Currency -->
+            <column name="amount" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="currency" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Payment Status and Provider -->
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="provider" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="method" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <!-- Provider Transaction Details -->
+            <column name="provider_transaction_id" type="VARCHAR(255)"/>
+
+            <column name="provider_response" type="TEXT"/>
+
+            <!-- Customer Information -->
+            <column name="customer_email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="ip_address" type="VARCHAR(45)"/>
+
+            <!-- Failure Information -->
+            <column name="failure_reason" type="TEXT"/>
+
+            <!-- Timestamps -->
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="completed_at" type="TIMESTAMP"/>
+        </createTable>
+
+        <!-- Create Indexes for Performance -->
+        <createIndex indexName="idx_payment_reference" tableName="payments">
+            <column name="payment_reference"/>
+        </createIndex>
+
+        <createIndex indexName="idx_order_id" tableName="payments">
+            <column name="order_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_user_id" tableName="payments">
+            <column name="user_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_status" tableName="payments">
+            <column name="status"/>
+        </createIndex>
+
+        <createIndex indexName="idx_provider_transaction_id" tableName="payments">
+            <column name="provider_transaction_id"/>
+        </createIndex>
+
+        <createIndex indexName="idx_created_at" tableName="payments">
+            <column name="created_at"/>
+        </createIndex>
+
+        <!-- Composite index for user payments by status -->
+        <createIndex indexName="idx_user_status" tableName="payments">
+            <column name="user_id"/>
+            <column name="status"/>
+        </createIndex>
+
+        <rollback>
+            <dropTable tableName="payments"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

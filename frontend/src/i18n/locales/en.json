@@ -25,6 +25,7 @@
     "products": "Products",
     "categories": "Categories",
     "cart": "Cart",
+    "orders": "Orders",
     "admin": "Admin Panel",
     "login": "Login",
     "register": "Register",
@@ -102,7 +103,44 @@
     "checkout": "Checkout",
     "continueShopping": "Continue Shopping",
     "remove": "Remove",
-    "clear": "Clear Cart"
+    "clear": "Clear Cart",
+    "proceedToCheckout": "Proceed to Checkout"
+  },
+  "orders": {
+    "title": "My Orders",
+    "order": "Order",
+    "orderNumber": "Order #{{number}}",
+    "status": "Status",
+    "total": "Total",
+    "items": "Items",
+    "date": "Order Date",
+    "noOrders": "You haven't placed any orders yet",
+    "placeOrder": "Place Order",
+    "cancelOrder": "Cancel Order",
+    "viewDetails": "View Details",
+    "orderDetails": "Order Details",
+    "orderPlaced": "Order placed successfully!",
+    "orderCancelled": "Order cancelled successfully",
+    "confirmCancel": "Are you sure you want to cancel this order?",
+    "cannotCancel": "This order cannot be cancelled",
+    "backToOrders": "Back to Orders",
+    "checkout": {
+      "title": "Checkout",
+      "summary": "Order Summary",
+      "reviewOrder": "Review Your Order",
+      "confirmAndPay": "Confirm and Pay",
+      "processing": "Processing your order...",
+      "success": "Your order has been placed!",
+      "error": "Failed to place order. Please try again."
+    },
+    "status": {
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "PROCESSING": "Processing",
+      "SHIPPED": "Shipped",
+      "DELIVERED": "Delivered",
+      "CANCELLED": "Cancelled"
+    }
   },
   "admin": {
     "title": "Admin Panel",

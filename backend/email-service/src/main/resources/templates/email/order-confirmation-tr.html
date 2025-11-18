@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #4CAF50; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sipariş Onayı</h1>
+        </div>
+        <div class="content">
+            <p>Sayın <span th:text="${customerName}">Müşteri</span>,</p>
+            <p>Siparişiniz için teşekkür ederiz! Siparişinizi aldığımızı onaylıyoruz.</p>
+
+            <h3>Sipariş Detayları</h3>
+            <p><strong>Sipariş Numarası:</strong> <span th:text="${orderNumber}">ORD-123456</span></p>
+            <p><strong>Sipariş Tarihi:</strong> <span th:text="${orderDate}">17.11.2025</span></p>
+            <p><strong>Toplam Tutar:</strong> ₺<span th:text="${totalAmount}">0.00</span></p>
+
+            <h3>Sipariş Ürünleri</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ürün</th>
+                        <th>Adet</th>
+                        <th>Fiyat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${items}">
+                        <td th:text="${item.productName}">Ürün Adı</td>
+                        <td th:text="${item.quantity}">1</td>
+                        <td>₺<span th:text="${item.price}">0.00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Siparişiniz kargoya verildiğinde size bir kargo bildirim e-postası göndereceğiz.</p>
+            <p>Dukkan'da alışveriş yaptığınız için teşekkür ederiz!</p>
+        </div>
+        <div class="footer">
+            <p>&copy; <span th:text="${year}">2025</span> Dukkan. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+</body>
+</html>

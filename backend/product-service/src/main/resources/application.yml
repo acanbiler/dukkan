@@ -29,6 +29,19 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 5MB
+      file-size-threshold: 1MB
+
+# Custom application properties
+dukkan:
+  image:
+    storage:
+      directory: /var/dukkan/images/products
+
 management:
   endpoints:
     web:

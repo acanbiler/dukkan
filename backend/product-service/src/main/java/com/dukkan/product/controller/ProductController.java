@@ -8,14 +8,22 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -189,5 +197,53 @@ public class ProductController {
         log.info("REST request to deactivate product: {}", id);
         ProductDTO deactivated = productService.deactivateProduct(id);
         return ResponseEntity.ok(ApiResponse.success(deactivated, "Product deactivated successfully"));
+    }
+
+    @PostMapping(value = "/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Upload product image", description = "Upload an image file for a product (max 5 images, 5MB each, JPEG/PNG/WebP)")
+    public ResponseEntity<ApiResponse<ProductDTO>> uploadProductImage(
+            @PathVariable UUID id,
+            @RequestParam("file") MultipartFile file) throws IOException {
+        log.info("REST request to upload image for product: {} (file: {}, size: {} bytes)",
+                id, file.getOriginalFilename(), file.getSize());
+        ProductDTO updated = productService.uploadProductImage(id, file);
+        return ResponseEntity.ok(ApiResponse.success(updated, "Image uploaded successfully"));
+    }
+
+    @DeleteMapping("/{id}/images")
+    @Operation(summary = "Remove product image", description = "Remove an image from a product")
+    public ResponseEntity<ApiResponse<ProductDTO>> removeProductImage(
+            @PathVariable UUID id,
+            @RequestParam("url") String imageUrl) throws IOException {
+        log.info("REST request to remove image from product: {} (URL: {})", id, imageUrl);
+        ProductDTO updated = productService.removeProductImage(id, imageUrl);
+        return ResponseEntity.ok(ApiResponse.success(updated, "Image removed successfully"));
+    }
+
+    @GetMapping("/images/{filename}")
+    @Operation(summary = "Get product image", description = "Retrieve a product image file")
+    public ResponseEntity<Resource> getProductImage(@PathVariable String filename) throws IOException {
+        log.info("REST request to get product image: {}", filename);
+
+        // Get image path from storage directory
+        String storageDirectory = "/var/dukkan/images/products";
+        Path imagePath = Paths.get(storageDirectory, filename);
+
+        if (!Files.exists(imagePath)) {
+            log.warn("Image not found: {}", filename);
+            return ResponseEntity.notFound().build();
+        }
+
+        Resource resource = new FileSystemResource(imagePath);
+
+        // Determine content type
+        String contentType = Files.probeContentType(imagePath);
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .body(resource);
     }
 }

@@ -3,7 +3,9 @@ package com.dukkan.product.service;
 import com.dukkan.product.dto.ProductDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -92,4 +94,24 @@ public interface ProductService {
      * Deactivate a product
      */
     ProductDTO deactivateProduct(UUID id);
+
+    /**
+     * Upload an image for a product
+     *
+     * @param productId Product ID
+     * @param file Image file to upload
+     * @return Updated product DTO with new image URL
+     * @throws IOException if file upload fails
+     */
+    ProductDTO uploadProductImage(UUID productId, MultipartFile file) throws IOException;
+
+    /**
+     * Remove an image from a product
+     *
+     * @param productId Product ID
+     * @param imageUrl Image URL to remove
+     * @return Updated product DTO without the removed image
+     * @throws IOException if file deletion fails
+     */
+    ProductDTO removeProductImage(UUID productId, String imageUrl) throws IOException;
 }

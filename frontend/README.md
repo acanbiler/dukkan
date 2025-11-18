@@ -256,14 +256,45 @@ None currently.
 - Category browsing
 - Responsive design
 
+### User Authentication ✅
+- User registration
+- Login with JWT tokens
+- Role-based access (Customer, Admin)
+- Protected routes
+- Auth state management (AuthContext)
+
+### Order Management ✅
+- Order placement with checkout flow
+- Order history with pagination
+- Order details view
+- Order status tracking
+- Stock validation during checkout
+
+### Payment Integration ✅
+- Iyzico payment processing
+- Payment confirmation
+- Payment status tracking
+- Order-payment linkage
+
+### Internationalization ✅
+- English and Turkish language support
+- Language switcher component
+- Persistent language preference
+- Browser language detection
+
+### Admin Panel ✅
+- Product CRUD operations
+- Category management
+- Inventory tracking
+- Admin-only routes
+
 ## Future Enhancements
 
-- User authentication
-- Order placement and management
-- Payment integration
 - Product filtering by category/price
 - Product reviews and ratings
 - Wishlist functionality
-- Order history
 - Dark mode toggle
-- Internationalization (i18n)
+- Product image upload
+- Address management
+- Email notifications
+- Advanced search with filters

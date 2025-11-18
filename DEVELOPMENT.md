@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ### Required Tools
-- **Java Development Kit (JDK) 25**
+- **Java Development Kit (JDK) 17**
 - **Node.js 20+** and **npm 10+**
 - **Maven 3.9+**
 - **Docker 24+** and **Docker Compose 2.20+**

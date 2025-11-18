@@ -53,4 +53,9 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
      */
     @Query("SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END FROM Category c WHERE c.name = :name AND c.id != :excludeId")
     boolean existsByNameAndIdNot(@Param("name") String name, @Param("excludeId") UUID excludeId);
+
+    /**
+     * Count child categories of a parent category
+     */
+    long countByParentCategoryId(UUID parentCategoryId);
 }

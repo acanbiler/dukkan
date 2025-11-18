@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: payment-service
+
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:payment_db}
+    username: ${DB_USER:dukkan}
+    password: ${DB_PASSWORD:dukkan123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate  # Never auto-create schema
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+    open-in-view: false  # Prevent lazy loading issues
+
+  # Liquibase Configuration
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    drop-first: false
+
+# Server Configuration
+server:
+  port: ${SERVER_PORT:8084}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Logging Configuration
+logging:
+  level:
+    com.dukkan.payment: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# SpringDoc OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+
+# Payment Provider Configuration
+payment:
+  providers:
+    iyzico:
+      enabled: ${IYZICO_ENABLED:true}
+      api-key: ${IYZICO_API_KEY:your-api-key}
+      secret-key: ${IYZICO_SECRET_KEY:your-secret-key}
+      base-url: ${IYZICO_BASE_URL:https://sandbox-api.iyzipay.com}
+
+    stripe:
+      enabled: ${STRIPE_ENABLED:false}
+      api-key: ${STRIPE_API_KEY:}
+      secret-key: ${STRIPE_SECRET_KEY:}
+
+    paypal:
+      enabled: ${PAYPAL_ENABLED:false}
+      client-id: ${PAYPAL_CLIENT_ID:}
+      client-secret: ${PAYPAL_CLIENT_SECRET:}
+
+# Application Configuration
+app:
+  payment:
+    default-currency: TRY
+    callback-url: ${PAYMENT_CALLBACK_URL:http://localhost:8084/api/v1/payments/callback}
+    timeout-seconds: 30

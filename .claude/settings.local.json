@@ -9,7 +9,19 @@
       "Bash(tree:*)",
       "WebFetch(domain:code.claude.com)",
       "Bash(mvn test:*)",
-      "Bash(java:*)"
+      "Bash(java:*)",
+      "Bash(mkdir:*)",
+      "Skill(backend-dev-guidelines)",
+      "Skill(frontend-dev-guidelines)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:coverage:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(mvn clean:*)",
+      "Bash(chmod:*)",
+      "Bash(cat:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

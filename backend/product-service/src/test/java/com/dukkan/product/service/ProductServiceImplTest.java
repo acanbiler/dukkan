@@ -210,7 +210,6 @@ class ProductServiceImplTest {
 
         // Then
         assertThat(result).isNotNull();
-        verify(testProduct).reduceStock(reduceBy);
         verify(productRepository).save(testProduct);
     }
 

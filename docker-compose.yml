@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: dukkan
       POSTGRES_PASSWORD: dukkan123
-      POSTGRES_MULTIPLE_DATABASES: dukkan_product,dukkan_user,dukkan_order
+      POSTGRES_MULTIPLE_DATABASES: dukkan_product,dukkan_user,dukkan_order,payment_db,email_db
     ports:
       - "5432:5432"
     volumes:
@@ -22,56 +22,160 @@ services:
       timeout: 5s
       retries: 5
 
-  # Product Service (will be uncommented when JAR is built)
-  # product-service:
-  #   build:
-  #     context: ./backend/product-service
-  #     dockerfile: ../../docker/product-service/Dockerfile
-  #   container_name: dukkan-product-service
-  #   environment:
-  #     DB_HOST: postgres
-  #     DB_PORT: 5432
-  #     DB_NAME: dukkan_product
-  #     DB_USER: dukkan
-  #     DB_PASSWORD: dukkan
-  #   ports:
-  #     - "8081:8081"
-  #   depends_on:
-  #     postgres:
-  #       condition: service_healthy
-  #   networks:
-  #     - dukkan-network
+  # Product Service
+  product-service:
+    build:
+      context: .
+      dockerfile: docker/product-service/Dockerfile
+    container_name: dukkan-product-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: dukkan_product
+      DB_USER: dukkan
+      DB_PASSWORD: dukkan123
+    ports:
+      - "8081:8081"
+    volumes:
+      - product_images:/var/dukkan/images/products
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dukkan-network
+    restart: unless-stopped
 
-  # API Gateway (will be uncommented when JAR is built)
-  # api-gateway:
-  #   build:
-  #     context: ./backend/api-gateway
-  #     dockerfile: ../../docker/api-gateway/Dockerfile
-  #   container_name: dukkan-api-gateway
-  #   environment:
-  #     PRODUCT_SERVICE_URL: http://product-service:8081
-  #     ALLOWED_ORIGINS: http://localhost:5173,http://localhost:3000
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - product-service
-  #   networks:
-  #     - dukkan-network
+  # User Service
+  user-service:
+    build:
+      context: .
+      dockerfile: docker/user-service/Dockerfile
+    container_name: dukkan-user-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: dukkan_user
+      DB_USER: dukkan
+      DB_PASSWORD: dukkan123
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dukkan-network
+    restart: unless-stopped
 
-  # Frontend (will be uncommented when built)
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: ../docker/frontend/Dockerfile
-  #   container_name: dukkan-frontend
-  #   environment:
-  #     VITE_API_BASE_URL: http://localhost:8080/api/v1
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     - api-gateway
-  #   networks:
-  #     - dukkan-network
+  # Order Service
+  order-service:
+    build:
+      context: .
+      dockerfile: docker/order-service/Dockerfile
+    container_name: dukkan-order-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: dukkan_order
+      DB_USER: dukkan
+      DB_PASSWORD: dukkan123
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dukkan-network
+    restart: unless-stopped
+
+  # Payment Service
+  payment-service:
+    build:
+      context: .
+      dockerfile: docker/payment-service/Dockerfile
+    container_name: dukkan-payment-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: payment_db
+      DB_USER: dukkan
+      DB_PASSWORD: dukkan123
+      IYZICO_ENABLED: "true"
+      IYZICO_API_KEY: ${IYZICO_API_KEY:-sandbox-api-key}
+      IYZICO_SECRET_KEY: ${IYZICO_SECRET_KEY:-sandbox-secret-key}
+      IYZICO_BASE_URL: https://sandbox-api.iyzipay.com
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dukkan-network
+    restart: unless-stopped
+
+  # Email Service
+  email-service:
+    build:
+      context: .
+      dockerfile: docker/email-service/Dockerfile
+    container_name: dukkan-email-service
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: email_db
+      DB_USER: dukkan
+      DB_PASSWORD: dukkan123
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY:-your-sendgrid-api-key}
+      SENDGRID_FROM_EMAIL: ${SENDGRID_FROM_EMAIL:-noreply@dukkan.com}
+      SENDGRID_FROM_NAME: ${SENDGRID_FROM_NAME:-Dukkan}
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dukkan-network
+    restart: unless-stopped
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: .
+      dockerfile: docker/api-gateway/Dockerfile
+    container_name: dukkan-api-gateway
+    environment:
+      PRODUCT_SERVICE_URL: http://product-service:8081
+      USER_SERVICE_URL: http://user-service:8082
+      ORDER_SERVICE_URL: http://order-service:8083
+      PAYMENT_SERVICE_URL: http://payment-service:8084
+      EMAIL_SERVICE_URL: http://email-service:8085
+      ALLOWED_ORIGINS: http://localhost:5173,http://localhost:3000,http://localhost:80
+    ports:
+      - "8080:8080"
+    depends_on:
+      - product-service
+      - user-service
+      - order-service
+      - payment-service
+      - email-service
+    networks:
+      - dukkan-network
+    restart: unless-stopped
+
+  # Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8080/api/v1
+    container_name: dukkan-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api-gateway
+    networks:
+      - dukkan-network
+    restart: unless-stopped
 
 networks:
   dukkan-network:
@@ -79,3 +183,4 @@ networks:
 
 volumes:
   postgres_data:
+  product_images:

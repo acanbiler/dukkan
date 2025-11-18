@@ -32,6 +32,22 @@ spring:
           filters:
             - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
 
+        # Payment Service Routes
+        - id: payment-service
+          uri: ${PAYMENT_SERVICE_URL:http://localhost:8084}
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
+
+        # Email Service Routes
+        - id: email-service
+          uri: ${EMAIL_SERVICE_URL:http://localhost:8085}
+          predicates:
+            - Path=/api/v1/emails/**
+          filters:
+            - RewritePath=/api/v1/(?<segment>.*), /api/v1/$\{segment}
+
       globalcors:
         cors-configurations:
           '[/**]':

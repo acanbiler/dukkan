@@ -25,6 +25,7 @@
     "products": "Ürünler",
     "categories": "Kategoriler",
     "cart": "Sepet",
+    "orders": "Siparişler",
     "admin": "Yönetim Paneli",
     "login": "Giriş Yap",
     "register": "Kayıt Ol",
@@ -102,7 +103,44 @@
     "checkout": "Ödeme Yap",
     "continueShopping": "Alışverişe Devam Et",
     "remove": "Kaldır",
-    "clear": "Sepeti Temizle"
+    "clear": "Sepeti Temizle",
+    "proceedToCheckout": "Ödemeye Geç"
+  },
+  "orders": {
+    "title": "Siparişlerim",
+    "order": "Sipariş",
+    "orderNumber": "Sipariş #{{number}}",
+    "status": "Durum",
+    "total": "Toplam",
+    "items": "Ürünler",
+    "date": "Sipariş Tarihi",
+    "noOrders": "Henüz hiç siparişiniz yok",
+    "placeOrder": "Siparişi Onayla",
+    "cancelOrder": "Siparişi İptal Et",
+    "viewDetails": "Detayları Gör",
+    "orderDetails": "Sipariş Detayları",
+    "orderPlaced": "Sipariş başarıyla oluşturuldu!",
+    "orderCancelled": "Sipariş başarıyla iptal edildi",
+    "confirmCancel": "Bu siparişi iptal etmek istediğinizden emin misiniz?",
+    "cannotCancel": "Bu sipariş iptal edilemez",
+    "backToOrders": "Siparişlere Dön",
+    "checkout": {
+      "title": "Ödeme",
+      "summary": "Sipariş Özeti",
+      "reviewOrder": "Siparişinizi İnceleyin",
+      "confirmAndPay": "Onayla ve Öde",
+      "processing": "Siparişiniz işleniyor...",
+      "success": "Siparişiniz alındı!",
+      "error": "Sipariş oluşturulamadı. Lütfen tekrar deneyin."
+    },
+    "status": {
+      "PENDING": "Beklemede",
+      "CONFIRMED": "Onaylandı",
+      "PROCESSING": "İşleniyor",
+      "SHIPPED": "Kargoya Verildi",
+      "DELIVERED": "Teslim Edildi",
+      "CANCELLED": "İptal Edildi"
+    }
   },
   "admin": {
     "title": "Yönetim Paneli",

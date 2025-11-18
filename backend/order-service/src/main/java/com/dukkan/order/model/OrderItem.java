@@ -11,7 +11,6 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "order_items")
-@Getter
 @Setter
 @Builder
 @NoArgsConstructor
@@ -50,5 +49,44 @@ public class OrderItem {
         if (quantity != null && priceAtPurchase != null) {
             this.subtotal = priceAtPurchase.multiply(BigDecimal.valueOf(quantity));
         }
+    }
+
+    // Getters
+    public UUID getId() {
+        return id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public UUID getProductId() {
+        return productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductSku() {
+        return productSku;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public BigDecimal getPriceAtPurchase() {
+        return priceAtPurchase;
+    }
+
+    /**
+     * Get subtotal - calculates on-the-fly if not yet persisted
+     */
+    public BigDecimal getSubtotal() {
+        if (subtotal == null && quantity != null && priceAtPurchase != null) {
+            return priceAtPurchase.multiply(BigDecimal.valueOf(quantity));
+        }
+        return subtotal;
     }
 }

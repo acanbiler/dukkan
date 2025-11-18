@@ -10,6 +10,7 @@ import {
   IconUser,
   IconLogout,
   IconLogin,
+  IconPackage,
 } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/context/AuthContext';
@@ -40,6 +41,12 @@ export const Header = () => {
           <Button component={Link} to="/categories" variant="subtle" leftSection={<IconCategory size={16} />}>
             {t('nav.categories')}
           </Button>
+
+          {isAuthenticated && (
+            <Button component={Link} to="/orders" variant="subtle" leftSection={<IconPackage size={16} />}>
+              {t('nav.orders')}
+            </Button>
+          )}
 
           {isAdmin && (
             <Button component={Link} to="/admin" variant="subtle" leftSection={<IconSettings size={16} />}>

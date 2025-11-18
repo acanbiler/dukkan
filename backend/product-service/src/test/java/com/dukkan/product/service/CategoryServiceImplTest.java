@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -120,7 +121,7 @@ class CategoryServiceImplTest {
         // Given
         when(categoryRepository.findById(testId)).thenReturn(Optional.of(testCategory));
         when(productRepository.countByCategoryId(testId)).thenReturn(0L);
-        when(categoryRepository.countByParentCategoryId(testId)).thenReturn(0L);
+        when(categoryRepository.findByParentCategoryId(testId)).thenReturn(Collections.emptyList());
 
         // When
         categoryService.deleteCategory(testId);

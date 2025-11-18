@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Dukkan is a shopping web application built with a microservices architecture using React 19.2 frontend and Spring Boot 3.5.7 backend services. The project follows SOLID principles, Domain-Driven Design, and emphasizes simplicity (KISS principle).
+Dukkan is a shopping web application built with a microservices architecture using React 19 frontend and Spring Boot 3.5.7 backend services. The project follows SOLID principles, Domain-Driven Design, and emphasizes simplicity (KISS principle).
 
 ## Technology Stack
 
 **Backend:**
-- Java 25, Spring Boot 3.5.7, Spring Cloud Gateway
+- Java 17, Spring Boot 3.5.7, Spring Cloud Gateway
 - PostgreSQL 17, Liquibase for migrations
 - Maven for build management
 - No caching layer (deferred for simplicity)
 
 **Frontend:**
-- React 19.2, TypeScript, Mantine UI 8.3.7, Vite
+- React 19, TypeScript, Mantine UI 8.3.7, Vite
 - React Context API for state management
 
 **Infrastructure:**
@@ -447,19 +447,20 @@ export const MyComponent = ({ prop1, prop2 }: MyComponentProps) => {
 ## Current Status
 
 **Completed Features:**
-- ✅ Backend: Product Service (29 Java classes, 28 endpoints)
-- ✅ Backend: API Gateway (7 classes, routing, CORS, logging)
-- ✅ Frontend: Customer pages (products, categories, cart)
+- ✅ Backend: All 5 microservices (Product, User, Order, Payment, API Gateway)
+- ✅ Backend: Payment Service with Iyzico integration (Strategy Pattern)
+- ✅ Frontend: Customer pages (products, categories, cart, checkout, orders)
 - ✅ Frontend: Admin panel (product/category CRUD)
+- ✅ Infrastructure: Full Docker containerization (all services)
 - ✅ Infrastructure: PostgreSQL with Docker, Liquibase migrations
+- ✅ Testing: Backend 100% (79 tests passing)
 
 **NOT Implemented (Priority for next session):**
-- ❌ Testing (0% coverage - HIGH PRIORITY)
-- ❌ Full Dockerization (only database containerized)
-- ❌ User authentication
-- ❌ Order management
-- ❌ Payment integration
+- ❌ Frontend Testing (0% coverage - HIGH PRIORITY)
+- ❌ Payment Service Testing (HIGH PRIORITY)
+- ❌ Email Service (order confirmations)
 - ❌ Product images (using placeholders)
+- ❌ Address management for shipping
 
 **See NEXT_STEPS.md for detailed roadmap**
 

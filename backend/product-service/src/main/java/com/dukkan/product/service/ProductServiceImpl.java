@@ -14,7 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductMapper productMapper;
+    private final ImageStorageService imageStorageService;
 
     @Override
     @Transactional
@@ -260,5 +263,53 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Deactivated product with id: {}", id);
         return productMapper.toDTO(savedProduct);
+    }
+
+    @Override
+    @Transactional
+    public ProductDTO uploadProductImage(UUID productId, MultipartFile file) throws IOException {
+        log.debug("Uploading image for product: {}", productId);
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
+
+        // Check image limit (max 5 images)
+        if (product.getImageUrls() != null && product.getImageUrls().size() >= 5) {
+            throw new InvalidOperationException("Product already has maximum number of images (5)");
+        }
+
+        // Store image and get URL
+        String imageUrl = imageStorageService.storeImage(file, productId);
+
+        // Add image URL to product using domain logic
+        product.addImageUrl(imageUrl);
+        Product updatedProduct = productRepository.save(product);
+
+        log.info("Uploaded image for product: {} (URL: {})", productId, imageUrl);
+        return productMapper.toDTO(updatedProduct);
+    }
+
+    @Override
+    @Transactional
+    public ProductDTO removeProductImage(UUID productId, String imageUrl) throws IOException {
+        log.debug("Removing image from product: {} (URL: {})", productId, imageUrl);
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
+
+        // Check if image exists in product
+        if (product.getImageUrls() == null || !product.getImageUrls().contains(imageUrl)) {
+            throw new ResourceNotFoundException("Image", "url", imageUrl);
+        }
+
+        // Remove image URL from product using domain logic
+        product.removeImageUrl(imageUrl);
+        Product updatedProduct = productRepository.save(product);
+
+        // Delete physical file
+        imageStorageService.deleteImage(imageUrl);
+
+        log.info("Removed image from product: {} (URL: {})", productId, imageUrl);
+        return productMapper.toDTO(updatedProduct);
     }
 }

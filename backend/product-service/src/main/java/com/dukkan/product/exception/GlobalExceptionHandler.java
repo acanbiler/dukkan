@@ -69,6 +69,22 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * Handle InvalidFileException (400)
+     */
+    @ExceptionHandler(InvalidFileException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidFile(InvalidFileException ex) {
+        log.error("Invalid file upload: {}", ex.getMessage());
+
+        ErrorResponse response = ErrorResponse.create(
+                "INVALID_FILE",
+                ex.getMessage(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    /**
      * Handle validation errors (400)
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
