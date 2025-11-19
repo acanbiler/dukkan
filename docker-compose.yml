@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database
   postgres:
@@ -25,8 +23,8 @@ services:
   # Product Service
   product-service:
     build:
-      context: .
-      dockerfile: docker/product-service/Dockerfile
+      context: ./backend/product-service
+      dockerfile: Dockerfile
     container_name: dukkan-product-service
     environment:
       DB_HOST: postgres
@@ -48,8 +46,8 @@ services:
   # User Service
   user-service:
     build:
-      context: .
-      dockerfile: docker/user-service/Dockerfile
+      context: ./backend/user-service
+      dockerfile: Dockerfile
     container_name: dukkan-user-service
     environment:
       DB_HOST: postgres
@@ -69,8 +67,8 @@ services:
   # Order Service
   order-service:
     build:
-      context: .
-      dockerfile: docker/order-service/Dockerfile
+      context: ./backend/order-service
+      dockerfile: Dockerfile
     container_name: dukkan-order-service
     environment:
       DB_HOST: postgres
@@ -90,8 +88,8 @@ services:
   # Payment Service
   payment-service:
     build:
-      context: .
-      dockerfile: docker/payment-service/Dockerfile
+      context: ./backend/payment-service
+      dockerfile: Dockerfile
     container_name: dukkan-payment-service
     environment:
       DB_HOST: postgres
@@ -115,8 +113,8 @@ services:
   # Email Service
   email-service:
     build:
-      context: .
-      dockerfile: docker/email-service/Dockerfile
+      context: ./backend/email-service
+      dockerfile: Dockerfile
     container_name: dukkan-email-service
     environment:
       DB_HOST: postgres
@@ -139,8 +137,8 @@ services:
   # API Gateway
   api-gateway:
     build:
-      context: .
-      dockerfile: docker/api-gateway/Dockerfile
+      context: ./backend/api-gateway
+      dockerfile: Dockerfile
     container_name: dukkan-api-gateway
     environment:
       PRODUCT_SERVICE_URL: http://product-service:8081
@@ -164,8 +162,8 @@ services:
   # Frontend
   frontend:
     build:
-      context: .
-      dockerfile: docker/frontend/Dockerfile
+      context: ./frontend
+      dockerfile: Dockerfile
       args:
         VITE_API_BASE_URL: http://localhost:8080/api/v1
     container_name: dukkan-frontend
