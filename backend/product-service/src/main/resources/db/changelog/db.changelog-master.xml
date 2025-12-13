@@ -10,4 +10,8 @@
     <include file="db/changelog/changes/002-create-products-table.xml"/>
     <include file="db/changelog/changes/003-create-product-images-table.xml"/>
 
+    <!-- Seed data -->
+    <include file="db/changelog/changes/004-seed-categories.xml"/>
+    <include file="db/changelog/changes/005-seed-products.xml"/>
+
 </databaseChangeLog>

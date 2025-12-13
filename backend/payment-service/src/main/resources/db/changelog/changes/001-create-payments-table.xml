@@ -60,6 +60,8 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="customer_name" type="VARCHAR(100)"/>
+
             <column name="ip_address" type="VARCHAR(45)"/>
 
             <!-- Failure Information -->
@@ -75,6 +77,8 @@
             </column>
 
             <column name="completed_at" type="TIMESTAMP"/>
+
+            <column name="failed_at" type="TIMESTAMP"/>
         </createTable>
 
         <!-- Create Indexes for Performance -->

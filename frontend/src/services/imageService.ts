@@ -1,4 +1,4 @@
-import api from './api';
+import { apiClient } from './api';
 import { Product } from '../types/product';
 
 /**
@@ -15,7 +15,7 @@ export const uploadImage = async (productId: string, file: File): Promise<Produc
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await api.post<{ data: Product }>(
+  const response = await apiClient.post<{ data: Product }>(
     `/products/${productId}/images`,
     formData,
     {
@@ -35,7 +35,7 @@ export const uploadImage = async (productId: string, file: File): Promise<Produc
  * @returns Updated product without the deleted image
  */
 export const deleteImage = async (productId: string, imageUrl: string): Promise<Product> => {
-  const response = await api.delete<{ data: Product }>(
+  const response = await apiClient.delete<{ data: Product }>(
     `/products/${productId}/images`,
     {
       params: { url: imageUrl },

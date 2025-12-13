@@ -1,4 +1,4 @@
-import { Drawer, Stack, Title, Text, Button, Divider, Group } from '@mantine/core';
+import { Drawer, Stack, Text, Button, Divider, Group } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/context/CartContext';
 import { CartItemComponent } from './CartItem';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Group, Title, Button, Menu, Avatar, Text } from '@mantine/core';
+import { Group, Title, Button, Menu, Avatar } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import {
   IconShoppingCart,

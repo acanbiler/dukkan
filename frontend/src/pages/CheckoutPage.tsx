@@ -53,7 +53,7 @@ export const CheckoutPage = () => {
       };
 
       // Place order
-      const order = await orderService.placeOrder(orderRequest);
+      await orderService.placeOrder(orderRequest);
 
       // Success!
       notifications.show({

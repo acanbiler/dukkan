@@ -21,7 +21,22 @@
       "Bash(mvn clean:*)",
       "Bash(chmod:*)",
       "Bash(cat:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Skill(superpowers:executing-plans)",
+      "Bash(xargs:*)",
+      "Bash(done)",
+      "Bash(for service in product-service user-service order-service payment-service email-service api-gateway)",
+      "Bash(do echo \"=== $service Dockerfile ===\")",
+      "Bash(if [ -f \"backend/$service/Dockerfile\" ])",
+      "Bash(then echo \"✓ EXISTS\")",
+      "Bash(else echo \"✗ MISSING\")",
+      "Bash(fi)",
+      "Bash(if [ -f \"frontend/Dockerfile\" ])",
+      "Bash(then echo \"✓ Frontend Dockerfile EXISTS\")",
+      "Bash(else echo \"✗ Frontend Dockerfile MISSING\")",
+      "Bash(test:*)",
+      "Bash(docker compose:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []
